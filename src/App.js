@@ -1,32 +1,14 @@
 import React from 'react';
 import './App.css';
-import { busCoordinatesSubscription, getAllRoutes } from './lib/query';
+import { getAllRoutes } from './lib/query';
 
 function App() {
-	const initializer = getAllRoutes();
-	const response = busCoordinatesSubscription();
-	// const response = fetch('https://stormy-sands-01102.herokuapp.com/', {
-	// 	method: 'POST',
-	// 	headers: {
-	// 		'Content-Type': 'application/json'
-	// 	},
-	// 	body: JSON.stringify({
-	// 		query: `{
-	// 		AllBusStops {
-	// 			_id
-	// 			name
-	// 			latitude
-	// 			longitude
-	// 		}
-	// 	}`
-	// 	})
-	// });
-	console.log(initializer);
-	response.subscribe({
-		next({ data }) {
-			console.log(data);
-		}
-	});
+	setInterval(() => {
+		const response = getAllRoutes().finally((value) => {
+			return value;
+		});
+		console.log(response);
+	}, 60 * 1000);
 
 	return <h1>Hello</h1>;
 }
